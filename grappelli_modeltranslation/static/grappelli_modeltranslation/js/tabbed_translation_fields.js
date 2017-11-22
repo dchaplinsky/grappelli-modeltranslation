@@ -34,9 +34,9 @@
 
                     // Adding new inlines, rebinding events
                     $('.grp-add-handler').bind('click' + mt.options.className, function(){
-                        group = $(this).parents('.group');
+                        group = $(this).closest('.grp-group');
                         window.setTimeout(function(){
-                            self._createInlineTabs(group.find('.grp-items > .grp-module:last').prev());
+                            self._createInlineTabs(group.find('>.grp-items > .grp-module:last').prev());
                         }, 200);
                     });
                 }
@@ -201,6 +201,7 @@
             mt._createInlineTabs = function($parent) {
                 var tabs = [],
                     translations = this._getTranslatedFields($parent);
+
                 $.each(translations, function (name, languages) {
                     var tabs_container = $('<div class="mt-switcher-container"></div>'),
                       tabs_list = $('<ul class="mt-switcher"></ul>'),
@@ -258,7 +259,7 @@
                     out = {},
                     langs = [];
                 if ($parent) {
-                    fields = $($parent).find(mt.options.className).filter(this.options.fieldTypes);
+                    fields = $($parent).find(">fieldset " + mt.options.className).filter(this.options.fieldTypes);
                 }
                 else {
                     fields = $(mt.options.className).filter(this.options.fieldTypes);
